@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pressure Perfect Belfast | Premium Pressure Washing &amp; Exterior Cleaning</title>
+<meta name="description" content="Professional pressure washing, driveway cleaning, patio restoration and soft washing across Belfast, Bangor, Holywood and the Greater Belfast area. Book Max Loebnau and Pressure Perfect Belfast via WhatsApp.">
+<meta name="theme-color" content="#FAFAF9">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Pressure Perfect Belfast">
+<meta property="og:description" content="Professional pressure washing &amp; exterior restoration across Greater Belfast, delivered personally by Max Loebnau.">
+<meta property="og:type" content="website">
+
+<!-- Favicon: simple inline droplet, no external file needed -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%2309090b'/%3E%3Cpath d='M50 16 C36 40 26 55 26 68 a24 24 0 0 0 48 0 C74 55 64 40 50 16 Z' fill='%23D7FF3E'/%3E%3C/svg%3E">
+
+<!-- Fonts: Big Shoulders Display (condensed industrial display, nods to Belfast's engineering/shipyard heritage),
+     Inter (body/UI), Space Mono (used ONLY for literal instrument-readout numbers: the PSI gauge and the price tag) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome: used ONLY for brand marks Lucide doesn't carry (WhatsApp, Instagram, Facebook) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<!-- Tailwind CSS (Play CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { accent: '#D7FF3E' },
+        fontFamily: {
+          display: ['"Big Shoulders Display"', 'sans-serif'],
+          sans: ['Inter', 'sans-serif'],
+          mono: ['"Space Mono"', 'monospace'],
+        },
+        boxShadow: {
+          glow: '0 0 40px -10px rgba(190,230,30,0.55)',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  /* LIGHT THEME — rebuilt from the original dark version per feedback: a pressure-washing
+     customer is most likely checking this on a phone, often outdoors, in daylight — a dark
+     UI fights ambient glare. Base is a warm off-white (ties to "clean concrete" rather than
+     stark clinical white); the lime accent is now used only as a solid fill (buttons, badges,
+     chips) or on the few deliberately-dark chips below — never as small text on the light page,
+     which would fail contrast. */
+  html { background:#FAFAF9; scroll-behavior:smooth; }
+  body { background:#FAFAF9; }
+
+  section[id] { scroll-margin-top: 5.5rem; }
+
+  ::selection { background:#D7FF3E; color:#1c1917; }
+
+  /* Signature structural device: a chamfered (notched) corner cut, used ONLY on
+     actionable elements (buttons / badges) — a deliberate alternative to soft rounded
+     corners, in the language of performance/instrument-panel UI. */
+  .notch {
+    clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  }
+  .notch-sm {
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  }
+
+  /* Faint structural grid, used behind the hero only */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(28,25,23,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(28,25,23,0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* Before/After placeholder textures — self-contained, no external photos required.
+     Swap the element carrying these classes for a real photo:
+     style="background-image:url('your-photo.jpg');background-size:cover;background-position:center;" */
+  .texture-before {
+    background:
+      radial-gradient(circle at 25% 30%, rgba(0,0,0,.28), transparent 42%),
+      radial-gradient(circle at 72% 62%, rgba(90,78,55,.32), transparent 46%),
+      radial-gradient(circle at 42% 85%, rgba(0,0,0,.22), transparent 38%),
+      linear-gradient(135deg, #4c4c45, #6c6c5f 50%, #57574f);
+    filter: saturate(.5) brightness(.72) contrast(1.05);
+  }
+  .texture-after {
+    background:
+      radial-gradient(circle at 30% 18%, rgba(34,211,238,.18), transparent 50%),
+      linear-gradient(135deg, #d9d9dd, #f3f3f5 50%, #e6e6ea);
+  }
+
+  /* The one orchestrated page-load moment: hero content settles in, staggered slightly */
+  @keyframes fade-up {
+    from { opacity:0; transform:translateY(18px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  .hero-fade-1 { animation: fade-up .7s ease-out both; }
+  .hero-fade-2 { animation: fade-up .7s ease-out .12s both; }
+
+  /* Gauge needle sweeps up to its reading once, on load — pressure "building" */
+  #gaugeNeedle {
+    transform-origin: 100px 100px;
+    animation: needle-sweep 1.3s cubic-bezier(.22,1.4,.36,1) .5s both;
+  }
+  @keyframes needle-sweep {
+    from { transform: rotate(-64deg); }
+    to   { transform: rotate(0deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+
+<body class="bg-stone-50 text-stone-600 font-sans antialiased">
+<noscript>
+  <div style="background:#D7FF3E;color:#1c1917;padding:12px;text-align:center;font-family:sans-serif;font-size:14px;">
+    This site works best with JavaScript enabled.
+  </div>
+</noscript>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================= -->
+<header id="mainNav" class="fixed top-0 inset-x-0 z-50 h-16 md:h-20 bg-stone-50/90 backdrop-blur-md border-b border-stone-200">
+  <nav class="max-w-7xl mx-auto h-full px-6 md:px-8 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2.5 font-display font-extrabold text-base md:text-lg tracking-tight text-stone-900 uppercase">
+      <span class="relative flex h-2.5 w-2.5 shrink-0">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
+      </span>
+      Pressure Perfect Belfast
+    </a>
+
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
+      <a href="#services" class="hover:text-stone-900 transition-colors">Services</a>
+      <a href="#process" class="hover:text-stone-900 transition-colors">The Process</a>
+      <a href="#about" class="hover:text-stone-900 transition-colors">About Max</a>
+      <a href="#reviews" class="hover:text-stone-900 transition-colors">Reviews</a>
+      <a href="#shop" class="hover:text-stone-900 transition-colors">Shop</a>
+    </div>
+
+    <a href="#booking" class="notch hidden md:inline-flex items-center gap-2 bg-accent text-zinc-950 font-semibold text-sm px-5 py-2.5 hover:shadow-glow hover:brightness-105 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50">
+      <i class="fa-brands fa-whatsapp text-base"></i> Book via WhatsApp
+    </a>
+
+    <button id="menuToggle" aria-label="Toggle menu" aria-expanded="false" class="md:hidden text-stone-900 p-1">
+      <i data-lucide="menu" id="menuIconOpen" class="w-6 h-6"></i>
+      <i data-lucide="x" id="menuIconClose" class="w-6 h-6 hidden"></i>
+    </button>
+  </nav>
+
+  <div id="mobileMenu" class="hidden md:hidden absolute top-16 inset-x-0 bg-stone-50/98 backdrop-blur-md border-b border-stone-200 px-6 py-6 flex flex-col gap-5 text-base font-medium shadow-lg">
+    <a href="#services" class="text-stone-700 hover:text-stone-900">Services</a>
+    <a href="#process" class="text-stone-700 hover:text-stone-900">The Process</a>
+    <a href="#about" class="text-stone-700 hover:text-stone-900">About Max</a>
+    <a href="#reviews" class="text-stone-700 hover:text-stone-900">Reviews</a>
+    <a href="#shop" class="text-stone-700 hover:text-stone-900">Shop</a>
+    <a href="#booking" class="notch inline-flex items-center justify-center gap-2 bg-accent text-zinc-950 font-semibold px-5 py-3 mt-2">
+      <i class="fa-brands fa-whatsapp"></i> Book via WhatsApp
+    </a>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+============================================================= -->
+<section class="relative pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-grid">
+  <div class="absolute inset-0 bg-gradient-to-b from-stone-50 via-stone-50/90 to-stone-50 pointer-events-none"></div>
+  <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[620px] h-[620px] bg-accent/25 rounded-full blur-[150px] pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-14 items-center">
+    <div class="hero-fade-1">
+      <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.03] text-stone-900 tracking-tight uppercase">
+        Restoring Belfast's curb appeal at 4,000 PSI
+      </h1>
+      <p class="mt-6 text-lg text-stone-600 max-w-md leading-relaxed">
+        Professional pressure washing, soft washing and exterior restoration, delivered personally by Max Loebnau, owner and operator of Pressure Perfect Belfast.
+      </p>
+
+      <div class="mt-9 flex flex-wrap gap-4">
+        <a href="#booking" class="notch inline-flex items-center gap-2 bg-accent text-zinc-950 font-semibold px-7 py-3.5 hover:shadow-glow hover:brightness-105 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Book via WhatsApp
+        </a>
+        <a href="#process" class="inline-flex items-center gap-2 border border-stone-300 text-stone-900 font-semibold px-7 py-3.5 hover:bg-accent hover:border-accent hover:text-zinc-950 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50">
+          See the process
+        </a>
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm text-stone-500">
+        <span class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-stone-400"></i> Fully insured</span>
+        <span class="flex items-center gap-2"><i data-lucide="leaf" class="w-4 h-4 text-stone-400"></i> Eco-friendly solutions</span>
+        <span class="flex items-center gap-2"><i data-lucide="handshake" class="w-4 h-4 text-stone-400"></i> Satisfaction guaranteed</span>
+      </div>
+    </div>
+
+    <!-- Before / After interactive slider -->
+    <div class="hero-fade-2">
+      <div class="relative aspect-[4/3] md:aspect-[5/4] w-full overflow-hidden border border-stone-200 shadow-xl select-none touch-none" id="baSlider">
+        <div class="absolute inset-0 texture-after">
+          <span class="absolute bottom-5 right-5 text-xs font-bold tracking-wide uppercase bg-accent text-zinc-950 px-3 py-1.5">After</span>
+        </div>
+        <div class="absolute inset-y-0 left-0 overflow-hidden texture-before" id="baBefore" style="width:50%;">
+          <span class="absolute bottom-5 left-5 text-xs font-bold tracking-wide uppercase bg-zinc-950/80 text-white px-3 py-1.5">Before</span>
+        </div>
+        <div class="absolute inset-y-0" id="baHandle" style="left:50%;">
+          <div class="absolute inset-y-0 left-0 w-0.5 bg-white/80 -translate-x-1/2"></div>
+          <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-accent text-zinc-950 flex items-center justify-center shadow-lg cursor-ew-resize">
+            <i data-lucide="move-horizontal" class="w-5 h-5"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mt-4">
+        <div class="flex items-center gap-3">
+          <div class="w-16 h-10 shrink-0 bg-zinc-950 notch-sm p-1.5 flex items-center justify-center">
+            <svg viewBox="0 0 200 120" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M22,100 A78,78 0 0 1 178,100" stroke="#3f3f46" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <path d="M22,100 A78,78 0 0 1 166,66" stroke="#D7FF3E" stroke-width="10" stroke-linecap="round" fill="none"/>
+              <line x1="22" y1="100" x2="33" y2="100" stroke="#71717a" stroke-width="2"/>
+              <line x1="100" y1="22" x2="100" y2="33" stroke="#71717a" stroke-width="2"/>
+              <line x1="178" y1="100" x2="167" y2="100" stroke="#71717a" stroke-width="2"/>
+              <line id="gaugeNeedle" x1="100" y1="100" x2="155" y2="72" stroke="#fafafa" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="100" cy="100" r="6" fill="#D7FF3E"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-mono font-bold text-base text-stone-900 leading-none">4,000 PSI</p>
+            <p class="text-[11px] text-stone-500 mt-1">Working pressure</p>
+          </div>
+        </div>
+        <p class="text-xs text-stone-400 flex items-center gap-1.5"><i data-lucide="move-horizontal" class="w-3.5 h-3.5"></i> Drag to compare</p>
+      </div>
+      <!-- Replace the .texture-before / .texture-after divs above with real job photos when available -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+============================================================= -->
+<section id="services" class="py-20 md:py-28 bg-white border-t border-stone-200">
+  <div class="max-w-5xl mx-auto px-6 md:px-8">
+    <h2 class="font-display font-bold text-3xl md:text-5xl text-stone-900 tracking-tight max-w-2xl mb-12 md:mb-16">
+      Every exterior surface, handled right
+    </h2>
+
+    <div class="border-t border-stone-200">
+      <div class="group py-7 border-b border-stone-200 flex items-start gap-6 hover:pl-3 transition-[padding] duration-300">
+        <i data-lucide="car" class="w-5 h-5 text-stone-400 group-hover:text-stone-900 transition-colors duration-300 mt-1.5 shrink-0"></i>
+        <div class="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1.5">
+          <h3 class="font-display font-semibold text-xl text-stone-900">Driveway deep clean</h3>
+          <p class="text-sm text-stone-500 sm:max-w-sm sm:text-right">Years of tyre marks, oil and black-spot algae lifted from block paving, concrete and tarmac.</p>
+        </div>
+      </div>
+      <div class="group py-7 border-b border-stone-200 flex items-start gap-6 hover:pl-3 transition-[padding] duration-300">
+        <i data-lucide="layout-grid" class="w-5 h-5 text-stone-400 group-hover:text-stone-900 transition-colors duration-300 mt-1.5 shrink-0"></i>
+        <div class="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1.5">
+          <h3 class="font-display font-semibold text-xl text-stone-900">Patio restoration</h3>
+          <p class="text-sm text-stone-500 sm:max-w-sm sm:text-right">Flags and slabs brought back to their original colour, joints cleared, surfaces resealed on request.</p>
+        </div>
+      </div>
+      <div class="group py-7 border-b border-stone-200 flex items-start gap-6 hover:pl-3 transition-[padding] duration-300">
+        <i data-lucide="home" class="w-5 h-5 text-stone-400 group-hover:text-stone-900 transition-colors duration-300 mt-1.5 shrink-0"></i>
+        <div class="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1.5">
+          <h3 class="font-display font-semibold text-xl text-stone-900">Roof soft-wash</h3>
+          <p class="text-sm text-stone-500 sm:max-w-sm sm:text-right">Low-pressure, chemical soft-washing removes moss and lichen without lifting tiles or voiding warranties.</p>
+        </div>
+      </div>
+      <div class="group py-7 border-b border-stone-200 flex items-start gap-6 hover:pl-3 transition-[padding] duration-300">
+        <i data-lucide="paintbrush" class="w-5 h-5 text-stone-400 group-hover:text-stone-900 transition-colors duration-300 mt-1.5 shrink-0"></i>
+        <div class="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1.5">
+          <h3 class="font-display font-semibold text-xl text-stone-900">Render &amp; wall cleaning</h3>
+          <p class="text-sm text-stone-500 sm:max-w-sm sm:text-right">Black streaking and algae lifted from render, brick and K-rend, surface-safe pressure throughout.</p>
+        </div>
+      </div>
+      <div class="group py-7 border-b border-stone-200 flex items-start gap-6 hover:pl-3 transition-[padding] duration-300">
+        <i data-lucide="trees" class="w-5 h-5 text-stone-400 group-hover:text-stone-900 transition-colors duration-300 mt-1.5 shrink-0"></i>
+        <div class="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1.5">
+          <h3 class="font-display font-semibold text-xl text-stone-900">Decking revival</h3>
+          <p class="text-sm text-stone-500 sm:max-w-sm sm:text-right">Algae and grey weathering removed, grain restored, ready to oil or stain.</p>
+        </div>
+      </div>
+      <div class="group py-7 border-b border-stone-200 flex items-start gap-6 hover:pl-3 transition-[padding] duration-300">
+        <i data-lucide="droplets" class="w-5 h-5 text-stone-400 group-hover:text-stone-900 transition-colors duration-300 mt-1.5 shrink-0"></i>
+        <div class="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1.5">
+          <h3 class="font-display font-semibold text-xl text-stone-900">Gutter &amp; fascia clean</h3>
+          <p class="text-sm text-stone-500 sm:max-w-sm sm:text-right">Exteriors cleared of moss run-off and grime so gutters and fascias match the rest of the job.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     THE PROCESS
+============================================================= -->
+<section id="process" class="py-20 md:py-28 bg-stone-50 border-t border-stone-200">
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <h2 class="font-display font-bold text-3xl md:text-5xl text-stone-900 tracking-tight max-w-2xl mb-14 md:mb-16">
+      Three steps to spotless
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-10 md:gap-8">
+      <div class="pt-6 border-t-2 border-stone-200">
+        <span class="notch-sm inline-block bg-accent text-zinc-950 font-display font-extrabold text-3xl md:text-4xl px-4 py-1.5">01</span>
+        <h3 class="font-display font-semibold text-xl text-stone-900 mt-5 mb-3">Inspection &amp; prep</h3>
+        <p class="text-sm text-stone-500 leading-relaxed">We walk the property first, covering delicate plants, securing furniture, and matching the right pressure and method to every surface before a single drop hits the ground.</p>
+      </div>
+      <div class="pt-6 border-t-2 border-stone-200">
+        <span class="notch-sm inline-block bg-accent text-zinc-950 font-display font-extrabold text-3xl md:text-4xl px-4 py-1.5">02</span>
+        <h3 class="font-display font-semibold text-xl text-stone-900 mt-5 mb-3">Eco-friendly soft / power wash</h3>
+        <p class="text-sm text-stone-500 leading-relaxed">Moss, grime, algae and oil stains don't stand a chance. Soft-washing protects delicate render and roofing; full power clears driveways and hard standing — eco-safe detergents throughout.</p>
+      </div>
+      <div class="pt-6 border-t-2 border-stone-200">
+        <span class="notch-sm inline-block bg-accent text-zinc-950 font-display font-extrabold text-3xl md:text-4xl px-4 py-1.5">03</span>
+        <h3 class="font-display font-semibold text-xl text-stone-900 mt-5 mb-3">The final reveal &amp; walkthrough</h3>
+        <p class="text-sm text-stone-500 leading-relaxed">We walk the finished job with you, surface by surface, so you see exactly what you're paying for. Nothing is signed off until you're satisfied.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT MAX
+============================================================= -->
+<section id="about" class="py-20 md:py-28 bg-white border-t border-stone-200">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-14 items-center">
+
+    <!-- Photo placeholder -->
+    <div class="order-2 md:order-1">
+      <div class="relative aspect-[4/5] border border-stone-200 bg-gradient-to-br from-stone-100 to-stone-50 flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-grid opacity-60"></div>
+        <div class="relative text-center px-8">
+          <i data-lucide="camera" class="w-9 h-9 text-stone-400 mx-auto mb-3"></i>
+          <p class="text-stone-500 text-sm">Photo of Max Loebnau<br>or the rig goes here</p>
+        </div>
+      </div>
+      <!-- Replace the placeholder div above with:
+           <img src="max-loebnau.jpg" alt="Max Loebnau, founder of Pressure Perfect Belfast" class="w-full h-full object-cover"> -->
+    </div>
+
+    <div class="order-1 md:order-2">
+      <h2 class="font-display font-bold text-3xl md:text-5xl text-stone-900 tracking-tight mb-6">
+        Built on Belfast pride, not a franchise playbook
+      </h2>
+      <p class="text-stone-600 leading-relaxed mb-4 max-w-md">
+        Pressure Perfect Belfast is owned and run by Max Loebnau — not a call centre, not a franchise territory, not a rotating cast of subcontractors. When you book a job, Max is the one who shows up, assesses the surface, and stands behind the result.
+      </p>
+      <!-- Placeholder founder bio — personalise with Max's real background, certifications and story before publishing -->
+      <p class="text-stone-600 leading-relaxed mb-8 max-w-md">
+        Serving the Greater Belfast area, Max treats every driveway, patio and render job with the same care, whether it's a modest terrace or a show-home patio, because reputation here is built one street at a time.
+      </p>
+
+      <!-- Placeholder stats — update with real figures once available -->
+      <div class="grid grid-cols-3 gap-4 border-t border-stone-200 pt-6 max-w-md">
+        <div>
+          <p class="font-display font-extrabold text-2xl md:text-3xl text-stone-900">500+</p>
+          <p class="text-xs text-stone-500 mt-1">Jobs completed</p>
+        </div>
+        <div>
+          <p class="font-display font-extrabold text-2xl md:text-3xl text-stone-900">5.0</p>
+          <p class="text-xs text-stone-500 mt-1">Average rating</p>
+        </div>
+        <div>
+          <p class="font-display font-extrabold text-2xl md:text-3xl text-stone-900">100%</p>
+          <p class="text-xs text-stone-500 mt-1">Belfast owned</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GOOGLE REVIEWS
+============================================================= -->
+<section id="reviews" class="py-20 md:py-28 bg-stone-50 border-t border-stone-200">
+  <div class="max-w-4xl mx-auto px-6 md:px-8">
+    <div class="text-center mb-12">
+      <h2 class="font-display font-bold text-3xl md:text-5xl text-stone-900 tracking-tight mb-7">Belfast homeowners agree</h2>
+
+      <div class="inline-flex flex-col items-center gap-2">
+        <span class="font-display font-extrabold text-5xl text-stone-900">4.9</span>
+        <div class="flex gap-1 text-accent" aria-hidden="true" style="filter:drop-shadow(0 1px 1px rgba(0,0,0,.15));">
+          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+          <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+        </div>
+        <p class="text-sm text-stone-500">Rated by homeowners across Belfast on Google</p>
+        <!-- Placeholder average rating — this will be replaced automatically once the live widget below is connected -->
+      </div>
+    </div>
+
+    <div class="border border-dashed border-stone-300 bg-white p-10 md:p-16 text-center">
+      <!-- Insert Live Google Reviews Widget / Elfsight Snippet Here -->
+      <i data-lucide="quote" class="w-7 h-7 text-stone-300 mx-auto mb-3"></i>
+      <p class="text-stone-400 text-sm">Live Google Reviews widget loads here</p>
+    </div>
+
+    <div class="text-center mt-10">
+      <!-- Replace # with the business's Google "write a review" short link -->
+      <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border border-stone-300 text-stone-900 font-semibold px-6 py-3 hover:bg-accent hover:border-accent hover:text-zinc-950 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50">
+        Leave us a review
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHATSAPP BOOKING FLOW
+============================================================= -->
+<section id="booking" class="py-20 md:py-28 bg-white border-t border-stone-200">
+  <div class="max-w-3xl mx-auto px-6 md:px-8">
+    <div class="text-center mb-12">
+      <h2 class="font-display font-bold text-3xl md:text-5xl text-stone-900 tracking-tight mb-4">Book in under 60 seconds</h2>
+      <p class="text-stone-600">Tell us what you need and we'll reply on WhatsApp, usually within the hour.</p>
+    </div>
+
+    <form id="bookingForm" class="border border-stone-200 bg-stone-50 p-6 md:p-10 grid sm:grid-cols-2 gap-5">
+      <div class="sm:col-span-2">
+        <label for="bookName" class="block text-xs font-semibold text-stone-500 mb-2">Your name</label>
+        <input type="text" id="bookName" placeholder="e.g. Sarah McKee" class="w-full bg-white border border-stone-300 rounded-md px-4 py-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-colors">
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="bookService" class="block text-xs font-semibold text-stone-500 mb-2">Service</label>
+        <select id="bookService" required class="w-full bg-white border border-stone-300 rounded-md px-4 py-3 text-stone-900 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-colors">
+          <option value="" disabled selected>Select a service</option>
+          <option>Driveway Deep Clean</option>
+          <option>Patio Restoration</option>
+          <option>Roof Treatment</option>
+          <option>Render &amp; Wall Cleaning</option>
+          <option>Decking Revival</option>
+          <option>Gutter &amp; Fascia Clean</option>
+          <option>Not sure — advise me</option>
+        </select>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="bookAddress" class="block text-xs font-semibold text-stone-500 mb-2">Street &amp; postcode</label>
+        <input type="text" id="bookAddress" required placeholder="e.g. 14 Stranmillis Road, BT9 5AJ" class="w-full bg-white border border-stone-300 rounded-md px-4 py-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-colors">
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="bookDate" class="block text-xs font-semibold text-stone-500 mb-2">Preferred date</label>
+        <input type="date" id="bookDate" class="w-full bg-white border border-stone-300 rounded-md px-4 py-3 text-stone-900 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 transition-colors">
+      </div>
+
+      <button type="submit" class="notch sm:col-span-2 mt-2 inline-flex items-center justify-center gap-2 bg-accent text-zinc-950 font-semibold text-base px-7 py-4 hover:shadow-glow hover:brightness-105 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50">
+        <i class="fa-brands fa-whatsapp text-xl"></i> Send via WhatsApp
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCT / UPSELL
+============================================================= -->
+<section id="shop" class="py-20 md:py-28 bg-stone-50 border-t border-stone-200">
+  <div class="max-w-5xl mx-auto px-6 md:px-8">
+    <h2 class="font-display font-bold text-3xl md:text-5xl text-stone-900 tracking-tight max-w-2xl mb-12">Make it last</h2>
+
+    <div class="grid md:grid-cols-2 gap-10 items-center border border-stone-200 bg-white p-8 md:p-12">
+      <div class="aspect-square bg-zinc-950 flex items-center justify-center">
+        <i data-lucide="flask-conical" class="w-16 h-16 text-accent"></i>
+      </div>
+      <div>
+        <h3 class="font-display font-bold text-2xl text-stone-900 mb-3">Pro-grade concrete &amp; patio sealer</h3>
+        <p class="text-stone-600 leading-relaxed mb-6">Lock in that fresh-clean look for up to 24 months. Our penetrating, breathable sealer protects against staining, moss regrowth and UV fade, so your driveway looks newly washed for twice as long.</p>
+        <div class="flex items-center gap-5">
+          <span class="font-mono font-bold text-3xl text-stone-900">£79.99</span>
+          <button id="buyNowBtn" class="notch inline-flex items-center gap-2 bg-accent text-zinc-950 font-semibold px-6 py-3 hover:shadow-glow hover:brightness-105 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white">
+            Buy now
+          </button>
+        </div>
+        <!-- buyNowBtn currently opens WhatsApp with a pre-filled order message.
+             Swap the click handler at the bottom of this file for a real Stripe
+             Payment Link, PayPal.me or Gumroad checkout URL once one exists. -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================= -->
+<footer class="bg-stone-100 border-t border-stone-200 pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+      <div class="lg:col-span-2">
+        <a href="#" class="flex items-center gap-2 font-display font-extrabold text-lg text-stone-900 mb-4 uppercase">
+          <span class="w-2.5 h-2.5 rounded-full bg-accent shrink-0"></span>
+          Pressure Perfect Belfast
+        </a>
+        <p class="text-sm text-stone-500 leading-relaxed max-w-sm mb-4">
+          Professional pressure washing and exterior restoration, owned and operated by Max Loebnau. Proudly serving Belfast, Bangor, Holywood, Newtownabbey, Lisburn, Carrickfergus and the wider Greater Belfast area.
+        </p>
+        <div class="flex gap-3">
+          <a href="#" aria-label="Instagram" class="w-9 h-9 border border-stone-300 flex items-center justify-center text-stone-500 hover:bg-accent hover:border-accent hover:text-zinc-950 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook" class="w-9 h-9 border border-stone-300 flex items-center justify-center text-stone-500 hover:bg-accent hover:border-accent hover:text-zinc-950 transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="WhatsApp" class="w-9 h-9 border border-stone-300 flex items-center justify-center text-stone-500 hover:bg-accent hover:border-accent hover:text-zinc-950 transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold text-stone-500 mb-4">Quick links</p>
+        <ul class="space-y-3 text-sm text-stone-600">
+          <li><a href="#services" class="hover:text-stone-900 transition-colors">Services</a></li>
+          <li><a href="#process" class="hover:text-stone-900 transition-colors">The Process</a></li>
+          <li><a href="#about" class="hover:text-stone-900 transition-colors">About Max</a></li>
+          <li><a href="#reviews" class="hover:text-stone-900 transition-colors">Reviews</a></li>
+          <li><a href="#shop" class="hover:text-stone-900 transition-colors">Shop</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold text-stone-500 mb-4">Get in touch</p>
+        <ul class="space-y-3 text-sm text-stone-600">
+          <!-- Replace placeholder phone/email with Max's real contact details -->
+          <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-stone-400"></i> <a href="tel:+44XXXXXXXXXX" class="hover:text-stone-900 transition-colors">028 XXXX XXXX</a></li>
+          <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-stone-400"></i> <a href="mailto:info@pressureperfectbelfast.co.uk" class="hover:text-stone-900 transition-colors">info@pressureperfectbelfast.co.uk</a></li>
+          <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-stone-400"></i> Greater Belfast, NI</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-stone-200 pt-6 text-center text-xs text-stone-400">
+      <p>&copy; <span id="currentYear"></span> Pressure Perfect Belfast. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp button — circular by deliberate exception, matching WhatsApp's own widget convention -->
+<a href="#" id="floatingWhatsApp" target="_blank" rel="noopener noreferrer" aria-label="Message Pressure Perfect Belfast on WhatsApp"
+   class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-accent text-zinc-950 shadow-xl shadow-stone-900/20 flex items-center justify-center hover:scale-110 transition-transform duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white">
+  <i class="fa-brands fa-whatsapp text-2xl"></i>
+</a>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script>
+  // =========================================================
+  // CONFIG — update before going live
+  // =========================================================
+  // WhatsApp Business number in international format: country code + number,
+  // NO "+", NO leading 0. e.g. a number shown as 07700 900123 becomes "447700900123".
+  const WHATSAPP_NUMBER = "44XXXXXXXXXX"; // TODO: replace with Max's real WhatsApp number
+  // Also update the tel: link in the footer contact list to match the same real number.
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Render Lucide icons
+    if (window.lucide) lucide.createIcons();
+
+    // Footer year, kept current automatically
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Floating WhatsApp button — default quick-enquiry message
+    const floatBtn = document.getElementById('floatingWhatsApp');
+    floatBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Max! I'd like to get a quote for pressure washing.")}`;
+
+    // Don't let people pick a booking date in the past
+    const dateInput = document.getElementById('bookDate');
+    dateInput.min = new Date().toISOString().split('T')[0];
+
+    // ---------------------------------------------------------
+    // Mobile menu toggle
+    // ---------------------------------------------------------
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const iconOpen = document.getElementById('menuIconOpen');
+    const iconClose = document.getElementById('menuIconClose');
+
+    const closeMenu = () => {
+      mobileMenu.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    menuToggle.addEventListener('click', () => {
+      const wasHidden = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+      menuToggle.setAttribute('aria-expanded', String(wasHidden));
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+    // ---------------------------------------------------------
+    // Before / After slider — pointer events cover mouse + touch
+    // ---------------------------------------------------------
+    const slider = document.getElementById('baSlider');
+    const before = document.getElementById('baBefore');
+    const handle = document.getElementById('baHandle');
+    let baDragging = false;
+
+    const setSliderPosition = (clientX) => {
+      const rect = slider.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      before.style.width = pct + '%';
+      handle.style.left = pct + '%';
+    };
+
+    slider.addEventListener('pointerdown', (e) => {
+      baDragging = true;
+      setSliderPosition(e.clientX);
+      slider.setPointerCapture(e.pointerId);
+    });
+    slider.addEventListener('pointermove', (e) => { if (baDragging) setSliderPosition(e.clientX); });
+    slider.addEventListener('pointerup', () => { baDragging = false; });
+    slider.addEventListener('pointercancel', () => { baDragging = false; });
+
+    // ---------------------------------------------------------
+    // Product "Buy Now" — routes to WhatsApp until a real payment
+    // link is wired up (see comment near the button in the HTML)
+    // ---------------------------------------------------------
+    document.getElementById('buyNowBtn').addEventListener('click', () => {
+      const msg = "Hi Max! I'd like to order the Pro-Grade Concrete & Patio Sealer (£79.99).";
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+
+    // ---------------------------------------------------------
+    // WhatsApp booking form submission
+    // ---------------------------------------------------------
+    const bookingForm = document.getElementById('bookingForm');
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('bookName').value.trim();
+      const service = document.getElementById('bookService').value;
+      const address = document.getElementById('bookAddress').value.trim();
+      const date = document.getElementById('bookDate').value;
+
+      if (!service || !address) {
+        alert('Please select a service and enter your address so Max can give you an accurate quote.');
+        return;
+      }
+
+      let message = `Hi Max! I'd like to book a *${service}*.\n📍 Address: ${address}\n`;
+      if (date) {
+        const formatted = new Date(date).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+        message += `📅 Preferred date: ${formatted}\n`;
+      }
+      if (name) message += `— ${name}`;
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    });
+  });
+</script>
+</body>
+</html>
