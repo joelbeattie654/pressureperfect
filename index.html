@@ -205,14 +205,31 @@
     </div>
 
     <!-- Before / After interactive slider -->
+    <!-- Before / After interactive slider -->
     <div class="hero-fade-2">
       <div class="relative aspect-[4/3] md:aspect-[5/4] w-full overflow-hidden border border-stone-200 shadow-xl select-none touch-none" id="baSlider">
-        <div class="absolute inset-0 texture-after">
-          <span class="absolute bottom-5 right-5 text-xs font-bold tracking-wide uppercase bg-accent text-zinc-950 px-3 py-1.5">After</span>
+        
+        <!-- AFTER PHOTO (Background layer) -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('images/driveway-after.jpg');">
+          <span class="absolute bottom-5 right-5 text-xs font-bold tracking-wide uppercase bg-accent text-zinc-950 px-3 py-1.5 z-10">After</span>
         </div>
-        <div class="absolute inset-y-0 left-0 overflow-hidden texture-before" id="baBefore" style="width:50%;">
-          <span class="absolute bottom-5 left-5 text-xs font-bold tracking-wide uppercase bg-zinc-950/80 text-white px-3 py-1.5">Before</span>
+
+        <!-- BEFORE PHOTO (Sliding top layer) -->
+        <div class="absolute inset-y-0 left-0 overflow-hidden" id="baBefore" style="width:50%;">
+          <!-- Inner div forces the image to stay full-width while clipped -->
+          <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('images/driveway-before.jpg'); width: var(--slider-total-width, 100vw); max-width: none;">
+            <span class="absolute bottom-5 left-5 text-xs font-bold tracking-wide uppercase bg-zinc-950/80 text-white px-3 py-1.5 z-10">Before</span>
+          </div>
         </div>
+
+        <!-- Slider Handle -->
+        <div class="absolute inset-y-0 z-20" id="baHandle" style="left:50%;">
+          <div class="absolute inset-y-0 left-0 w-0.5 bg-white/80 -translate-x-1/2"></div>
+          <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-accent text-zinc-950 flex items-center justify-center shadow-lg cursor-ew-resize">
+            <i data-lucide="move-horizontal" class="w-5 h-5"></i>
+          </div>
+        </div>
+      </div>
         <div class="absolute inset-y-0" id="baHandle" style="left:50%;">
           <div class="absolute inset-y-0 left-0 w-0.5 bg-white/80 -translate-x-1/2"></div>
           <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-accent text-zinc-950 flex items-center justify-center shadow-lg cursor-ew-resize">
